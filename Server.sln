@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 25.0.1700.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommBank", "CommBank\CommBank.csproj", "{B1519525-64BD-4258-81AE-1B65177ACFC9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1519525-64BD-4258-81AE-1B65177ACFC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1519525-64BD-4258-81AE-1B65177ACFC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1519525-64BD-4258-81AE-1B65177ACFC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1519525-64BD-4258-81AE-1B65177ACFC9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FF3CEE0-A2F7-4F54-BA35-77CA1FAD619D}
+	EndGlobalSection
+EndGlobal
