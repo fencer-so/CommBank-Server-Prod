@@ -8,7 +8,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("CommBank")
+    builder.Configuration.GetSection("CommBankDatabase")
 );
 
 builder.Services.AddSingleton<ApplicationsService>();
