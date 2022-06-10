@@ -18,7 +18,14 @@ public class Transaction
 
     public DateTime DateTime { get; set; } = DateTime.Now;
 
-    public ObjectId? GoalId { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? GoalId { get; set; }
+
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? UserId { get; set; }
+
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string[]? TagIds { get; set; }
 
     public string? Description { get; set; }
 }

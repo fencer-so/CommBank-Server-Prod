@@ -14,6 +14,7 @@ builder.Services.Configure<DatabaseSettings>(
 builder.Services.AddSingleton<ApplicationsService>();
 builder.Services.AddSingleton<AuthService>();
 builder.Services.AddSingleton<TagsService>();
+builder.Services.AddSingleton<TransactionsService>();
 builder.Services.AddSingleton<UsersService>();
 
 builder.Services.AddCors();
