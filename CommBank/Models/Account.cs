@@ -20,7 +20,9 @@ public class Account
     [BsonRepresentation(BsonType.String)]
     public AccountType AccountType { get; set; }
 
-    public ObjectId? ApplicationId { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? ApplicationId { get; set; }
 
-    public List<ObjectId>? TransactionIds { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public List<string>? TransactionIds { get; set; }
 }

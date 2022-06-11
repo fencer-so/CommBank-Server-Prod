@@ -17,11 +17,14 @@ public class Goal
 
     public DateTime Created { get; set; } = DateTime.Now;
 
-    public ObjectId? AccountId { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public string? AccountId { get; set; }
 
-    public List<ObjectId>? TransactionIds { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public List<string>? TransactionIds { get; set; }
 
-    public List<ObjectId>? TagIds { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public List<string>? TagIds { get; set; }
 
     public string? IconName { get; set; }
 }

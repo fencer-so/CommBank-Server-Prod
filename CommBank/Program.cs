@@ -11,8 +11,10 @@ builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection("CommBankDatabase")
 );
 
+builder.Services.AddSingleton<AccountsService>();
 builder.Services.AddSingleton<ApplicationsService>();
 builder.Services.AddSingleton<AuthService>();
+builder.Services.AddSingleton<GoalsService>();
 builder.Services.AddSingleton<TagsService>();
 builder.Services.AddSingleton<TransactionsService>();
 builder.Services.AddSingleton<UsersService>();
