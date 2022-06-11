@@ -1,5 +1,6 @@
 ﻿using CommBank.Models;
 using CommBank.Services;
+using MongoDB.Driver;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,17 +8,27 @@ builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.Configure<DatabaseSettings>(
-    builder.Configuration.GetSection("CommBankDatabase")
-);
 
-builder.Services.AddSingleton<AccountsService>();
-builder.Services.AddSingleton<ApplicationsService>();
-builder.Services.AddSingleton<AuthService>();
-builder.Services.AddSingleton<GoalsService>();
-builder.Services.AddSingleton<TagsService>();
-builder.Services.AddSingleton<TransactionsService>();
-builder.Services.AddSingleton<UsersService>();
+builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Secrets.json");
+
+var mongoClient = new MongoClient(builder.Configuration.GetConnectionString("CommBank"));
+var mongoDatabase = mongoClient.GetDatabase("CommBank");
+
+var accountsService = new AccountsService(mongoDatabase);
+var applicationsService = new ApplicationsService(mongoDatabase);
+var authService = new AuthService(mongoDatabase);
+var goalsService = new GoalsService(mongoDatabase);
+var tagsService = new TagsService(mongoDatabase);
+var transactionsService = new TransactionsService(mongoDatabase);
+var usersService = new UsersService(mongoDatabase);
+
+builder.Services.AddSingleton(accountsService);
+builder.Services.AddSingleton(applicationsService);
+builder.Services.AddSingleton(authService);
+builder.Services.AddSingleton(goalsService);
+builder.Services.AddSingleton(tagsService);
+builder.Services.AddSingleton(transactionsService);
+builder.Services.AddSingleton(usersService);
 
 builder.Services.AddCors();
 

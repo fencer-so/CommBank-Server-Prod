@@ -4,22 +4,13 @@ using MongoDB.Driver;
 
 namespace CommBank.Services;
 
-public class AuthService
+public class AuthService : IAuthService
 {
     private readonly IMongoCollection<User> _usersCollection;
 
-    public AuthService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public AuthService(IMongoDatabase mongoDatabase)
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.DatabaseName);
-
-        _usersCollection = mongoDatabase.GetCollection<User>(
-            databaseSettings.Value.UsersCollectionName
-        );
+        _usersCollection = mongoDatabase.GetCollection<User>("Users");
     }
 
     public async Task<User?> Login(string email, string password)
@@ -30,9 +21,7 @@ public class AuthService
 
         if (user is not null)
         {
-            Console.WriteLine("Password", user.Password);
             var isCorrectPassword = BCrypt.Net.BCrypt.Verify(password, user.Password);
-
 
             if (isCorrectPassword)
             {

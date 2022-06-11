@@ -8,9 +8,9 @@ namespace CommBank.Controllers;
 [Route("api/[controller]")]
 public class GoalController : ControllerBase
 {
-    private readonly GoalsService _goalsService;
+    private readonly IGoalsService _goalsService;
 
-    public GoalController(GoalsService goalsService) =>
+    public GoalController(IGoalsService goalsService) =>
         _goalsService = goalsService;
 
     [HttpGet]

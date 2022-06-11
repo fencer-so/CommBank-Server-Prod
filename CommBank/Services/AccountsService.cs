@@ -4,22 +4,13 @@ using MongoDB.Driver;
 
 namespace CommBank.Services;
 
-public class AccountsService
+public class AccountsService : IAccountsService
 {
     private readonly IMongoCollection<Account> _accountsCollection;
 
-    public AccountsService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public AccountsService(IMongoDatabase mongoDatabase)
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.DatabaseName);
-
-        _accountsCollection = mongoDatabase.GetCollection<Account>(
-            databaseSettings.Value.AccountsCollectionName
-        );
+        _accountsCollection = mongoDatabase.GetCollection<Account>("Accounts");
     }
 
     public async Task<List<Account>> GetAsync() =>

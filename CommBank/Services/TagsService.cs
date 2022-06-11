@@ -4,34 +4,25 @@ using MongoDB.Driver;
 
 namespace CommBank.Services;
 
-public class TagsService
+public class TagsService : ITagsService
 {
-    private readonly IMongoCollection<CommBank.Models.Tag> _tagsCollection;
+    private readonly IMongoCollection<Models.Tag> _tagsCollection;
 
-    public TagsService(
-        IOptions<DatabaseSettings> databaseSettings)
+    public TagsService(IMongoDatabase mongoDatabase)
     {
-        var mongoClient = new MongoClient(
-            databaseSettings.Value.ConnectionString);
-
-        var mongoDatabase = mongoClient.GetDatabase(
-            databaseSettings.Value.DatabaseName);
-
-        _tagsCollection = mongoDatabase.GetCollection<CommBank.Models.Tag>(
-            databaseSettings.Value.TagsCollectionName
-        );
+        _tagsCollection = mongoDatabase.GetCollection<Models.Tag>("Tags");
     }
 
-    public async Task<List<CommBank.Models.Tag>> GetAsync() =>
+    public async Task<List<Models.Tag>> GetAsync() =>
         await _tagsCollection.Find(_ => true).ToListAsync();
 
-    public async Task<CommBank.Models.Tag?> GetAsync(string id) =>
+    public async Task<Models.Tag?> GetAsync(string id) =>
         await _tagsCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(CommBank.Models.Tag newTag) =>
+    public async Task CreateAsync(Models.Tag newTag) =>
         await _tagsCollection.InsertOneAsync(newTag);
 
-    public async Task UpdateAsync(string id, CommBank.Models.Tag updatedTag) =>
+    public async Task UpdateAsync(string id, Models.Tag updatedTag) =>
         await _tagsCollection.ReplaceOneAsync(x => x.Id == id, updatedTag);
 
     public async Task RemoveAsync(string id) =>
