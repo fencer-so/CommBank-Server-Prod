@@ -57,7 +57,7 @@ public class GoalController : ControllerBase
 
 
     [HttpPut("{id:length(24)}/icon")]
-    public async Task<IActionResult> UpdateIcon(string id, string iconName)
+    public async Task<IActionResult> UpdateIcon(string id, UpdatedIcon updatedIcon)
     {
         var goal = await _goalsService.GetAsync(id);
 
@@ -66,7 +66,7 @@ public class GoalController : ControllerBase
             return NotFound();
         }
 
-        goal.IconName = iconName;
+        goal.IconName = updatedIcon.IconName;
 
         await _goalsService.UpdateAsync(id, goal);
 

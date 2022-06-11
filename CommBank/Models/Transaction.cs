@@ -14,7 +14,7 @@ public class Transaction
     [BsonRepresentation(BsonType.String)]
     public TransactionType TransactionType { get; set; }
 
-    public Int64 Amount { get; set; } = 0;
+    public double Amount { get; set; } = 0.00;
 
     public DateTime DateTime { get; set; } = DateTime.Now;
 

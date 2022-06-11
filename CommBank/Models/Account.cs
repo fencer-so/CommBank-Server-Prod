@@ -14,7 +14,7 @@ public class Account
 
     public string? Name { get; set; }
 
-    public Int64 Balance { get; set; } = 0;
+    public double Balance { get; set; } = 0;
 
     [JsonConverter(typeof(JsonStringEnumConverter))]
     [BsonRepresentation(BsonType.String)]

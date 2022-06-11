@@ -11,9 +11,11 @@ public class Goal
 
     public string? Name { get; set; }
 
-    public Int64 TargetAmount { get; set; } = 0;
+    public UInt64 TargetAmount { get; set; } = 0;
 
     public DateTime TargetDate { get; set; }
+
+    public double Balance { get; set; } = 0.00;
 
     public DateTime Created { get; set; } = DateTime.Now;
 
