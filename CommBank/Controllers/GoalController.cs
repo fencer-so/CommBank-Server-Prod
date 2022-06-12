@@ -9,9 +9,14 @@ namespace CommBank.Controllers;
 public class GoalController : ControllerBase
 {
     private readonly IGoalsService _goalsService;
+    private readonly IUsersService _usersService;
 
-    public GoalController(IGoalsService goalsService) =>
+    public GoalController(IGoalsService goalsService, IUsersService usersService)
+    {
         _goalsService = goalsService;
+        _usersService = usersService;
+    }
+        
 
     [HttpGet]
     public async Task<List<Goal>> Get() =>
@@ -34,6 +39,28 @@ public class GoalController : ControllerBase
     public async Task<IActionResult> Post(Goal newGoal)
     {
         await _goalsService.CreateAsync(newGoal);
+
+        if (newGoal.Id is not null && newGoal.UserId is not null)
+        {
+            var user = await _usersService.GetAsync(newGoal.UserId);
+
+            if (user is not null && user.Id is not null)
+            {
+                if (user.GoalIds is not null)
+                {
+                    user.GoalIds.Add(newGoal.Id);
+                }
+                else
+                {
+                    user.GoalIds = new()
+                    {
+                        newGoal.Id
+                    };
+                }
+
+                await _usersService.UpdateAsync(user.Id, user);
+            }
+        }
 
         return CreatedAtAction(nameof(Get), new { id = newGoal.Id }, newGoal);
     }
