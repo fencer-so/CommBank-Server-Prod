@@ -14,12 +14,12 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("
 var mongoClient = new MongoClient(builder.Configuration.GetConnectionString("CommBank"));
 var mongoDatabase = mongoClient.GetDatabase("CommBank");
 
-var accountsService = new AccountsService(mongoDatabase);
-var authService = new AuthService(mongoDatabase);
-var goalsService = new GoalsService(mongoDatabase);
-var tagsService = new TagsService(mongoDatabase);
-var transactionsService = new TransactionsService(mongoDatabase);
-var usersService = new UsersService(mongoDatabase);
+IAccountsService accountsService = new AccountsService(mongoDatabase);
+IAuthService authService = new AuthService(mongoDatabase);
+IGoalsService goalsService = new GoalsService(mongoDatabase);
+ITagsService tagsService = new TagsService(mongoDatabase);
+ITransactionsService transactionsService = new TransactionsService(mongoDatabase);
+IUsersService usersService = new UsersService(mongoDatabase);
 
 builder.Services.AddSingleton(accountsService);
 builder.Services.AddSingleton(authService);
