@@ -6,11 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CommBank.Tests;
 
-public class GoalControllerTests
+public class AccountControllerTests
 {
     private readonly FakeCollections collections;
 
-    public GoalControllerTests()
+    public AccountControllerTests()
     {
         collections = new();
     }
@@ -19,9 +19,9 @@ public class GoalControllerTests
     public async void GetAll()
     {
         // Arrange
-        var goals = collections.GetGoals();
-        IGoalsService service = new FakeGoalsService(goals, goals[0]);
-        GoalController controller = new(service);
+        var accounts = collections.GetAccounts();
+        IAccountsService service = new FakeAccountsService(accounts, accounts[0]);
+        AccountController controller = new(service);
 
         // Act
         var httpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
@@ -30,11 +30,10 @@ public class GoalControllerTests
 
         // Assert
         var index = 0;
-        foreach (Goal goal in result)
+        foreach (Account account in result)
         {
-            Assert.IsAssignableFrom<Goal>(goal);
-            Assert.Equal(goals[index].Id, goal.Id);
-            Assert.Equal(goals[index].Name, goal.Name);
+            Assert.IsAssignableFrom<Account>(account);
+            Assert.Equal(accounts[index].Id, account.Id);
             index++;
         }
     }
@@ -43,18 +42,18 @@ public class GoalControllerTests
     public async void Get()
     {
         // Arrange
-        var goals = collections.GetGoals();
-        IGoalsService service = new FakeGoalsService(goals, goals[0]);
-        GoalController controller = new(service);
+        var accounts = collections.GetAccounts();
+        IAccountsService service = new FakeAccountsService(accounts, accounts[0]);
+        AccountController controller = new(service);
 
         // Act
         var httpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
         controller.ControllerContext.HttpContext = httpContext;
-        var result = await controller.Get(goals[0].Id!);
+        var result = await controller.Get(accounts[0].Id!);
 
         // Assert
-        Assert.IsAssignableFrom<Goal>(result.Value);
-        Assert.Equal(goals[0], result.Value);
-        Assert.NotEqual(goals[1], result.Value);
+        Assert.IsAssignableFrom<Account>(result.Value);
+        Assert.Equal(accounts[0], result.Value);
+        Assert.NotEqual(accounts[1], result.Value);
     }
 }

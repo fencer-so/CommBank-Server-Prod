@@ -2,15 +2,14 @@
 using CommBank.Services;
 using CommBank.Models;
 using CommBank.Tests.Fake;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CommBank.Tests;
 
-public class GoalControllerTests
+public class UserControllerTests
 {
     private readonly FakeCollections collections;
 
-    public GoalControllerTests()
+    public UserControllerTests()
     {
         collections = new();
     }
@@ -19,9 +18,9 @@ public class GoalControllerTests
     public async void GetAll()
     {
         // Arrange
-        var goals = collections.GetGoals();
-        IGoalsService service = new FakeGoalsService(goals, goals[0]);
-        GoalController controller = new(service);
+        var users = collections.GetUsers();
+        IUsersService service = new FakeUsersService(users, users[0]);
+        UserController controller = new(service);
 
         // Act
         var httpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
@@ -30,11 +29,11 @@ public class GoalControllerTests
 
         // Assert
         var index = 0;
-        foreach (Goal goal in result)
+        foreach (User user in result)
         {
-            Assert.IsAssignableFrom<Goal>(goal);
-            Assert.Equal(goals[index].Id, goal.Id);
-            Assert.Equal(goals[index].Name, goal.Name);
+            Assert.IsAssignableFrom<User>(user);
+            Assert.Equal(users[index].Id, user.Id);
+            Assert.Equal(users[index].Name, user.Name);
             index++;
         }
     }
@@ -43,18 +42,18 @@ public class GoalControllerTests
     public async void Get()
     {
         // Arrange
-        var goals = collections.GetGoals();
-        IGoalsService service = new FakeGoalsService(goals, goals[0]);
-        GoalController controller = new(service);
+        var users = collections.GetUsers();
+        IUsersService service = new FakeUsersService(users, users[0]);
+        UserController controller = new(service);
 
         // Act
         var httpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
         controller.ControllerContext.HttpContext = httpContext;
-        var result = await controller.Get(goals[0].Id!);
+        var result = await controller.Get(users[0].Id!);
 
         // Assert
-        Assert.IsAssignableFrom<Goal>(result.Value);
-        Assert.Equal(goals[0], result.Value);
-        Assert.NotEqual(goals[1], result.Value);
+        Assert.IsAssignableFrom<User>(result.Value);
+        Assert.Equal(users[0], result.Value);
+        Assert.NotEqual(users[1], result.Value);
     }
 }

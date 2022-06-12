@@ -8,9 +8,9 @@ namespace CommBank.Controllers;
 [Route("api/[controller]")]
 public class TransactionController : ControllerBase
 {
-    private readonly TransactionsService _transactionsService;
+    private readonly ITransactionsService _transactionsService;
 
-    public TransactionController(TransactionsService transactionsService) =>
+    public TransactionController(ITransactionsService transactionsService) =>
         _transactionsService = transactionsService;
 
     [HttpGet]

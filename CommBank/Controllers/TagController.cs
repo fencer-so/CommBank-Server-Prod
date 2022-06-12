@@ -7,9 +7,9 @@ namespace CommBank.Controllers;
 [Route("api/[controller]")]
 public class TagController : ControllerBase
 {
-    private readonly TagsService _tagsService;
+    private readonly ITagsService _tagsService;
 
-    public TagController(TagsService tagsService) =>
+    public TagController(ITagsService tagsService) =>
         _tagsService = tagsService;
 
     [HttpGet]

@@ -2,15 +2,14 @@
 using CommBank.Services;
 using CommBank.Models;
 using CommBank.Tests.Fake;
-using Microsoft.AspNetCore.Mvc;
 
 namespace CommBank.Tests;
 
-public class GoalControllerTests
+public class TagControllerTests
 {
     private readonly FakeCollections collections;
 
-    public GoalControllerTests()
+    public TagControllerTests()
     {
         collections = new();
     }
@@ -19,9 +18,9 @@ public class GoalControllerTests
     public async void GetAll()
     {
         // Arrange
-        var goals = collections.GetGoals();
-        IGoalsService service = new FakeGoalsService(goals, goals[0]);
-        GoalController controller = new(service);
+        var tags = collections.GetTags();
+        ITagsService service = new FakeTagsService(tags, tags[0]);
+        TagController controller = new(service);
 
         // Act
         var httpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
@@ -30,11 +29,11 @@ public class GoalControllerTests
 
         // Assert
         var index = 0;
-        foreach (Goal goal in result)
+        foreach (Tag tag in result)
         {
-            Assert.IsAssignableFrom<Goal>(goal);
-            Assert.Equal(goals[index].Id, goal.Id);
-            Assert.Equal(goals[index].Name, goal.Name);
+            Assert.IsAssignableFrom<Tag>(tag);
+            Assert.Equal(tags[index].Id, tag.Id);
+            Assert.Equal(tags[index].Name, tag.Name);
             index++;
         }
     }
@@ -43,18 +42,18 @@ public class GoalControllerTests
     public async void Get()
     {
         // Arrange
-        var goals = collections.GetGoals();
-        IGoalsService service = new FakeGoalsService(goals, goals[0]);
-        GoalController controller = new(service);
+        var tags = collections.GetTags();
+        ITagsService service = new FakeTagsService(tags, tags[0]);
+        TagController controller = new(service);
 
         // Act
         var httpContext = new Microsoft.AspNetCore.Http.DefaultHttpContext();
         controller.ControllerContext.HttpContext = httpContext;
-        var result = await controller.Get(goals[0].Id!);
+        var result = await controller.Get(tags[0].Id!);
 
         // Assert
-        Assert.IsAssignableFrom<Goal>(result.Value);
-        Assert.Equal(goals[0], result.Value);
-        Assert.NotEqual(goals[1], result.Value);
+        Assert.IsAssignableFrom<Tag>(result.Value);
+        Assert.Equal(tags[0], result.Value);
+        Assert.NotEqual(tags[1], result.Value);
     }
 }

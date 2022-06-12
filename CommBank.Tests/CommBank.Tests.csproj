@@ -24,4 +24,10 @@
   <ItemGroup>
     <ProjectReference Include="..\CommBank\CommBank.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Fake\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Fake\" />
+  </ItemGroup>
 </Project>

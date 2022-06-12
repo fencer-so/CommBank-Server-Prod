@@ -8,9 +8,9 @@ namespace CommBank.Controllers;
 [Route("api/[controller]")]
 public class UserController : ControllerBase
 {
-    private readonly UsersService _usersService;
+    private readonly IUsersService _usersService;
 
-    public UserController(UsersService usersService) =>
+    public UserController(IUsersService usersService) =>
         _usersService = usersService;
 
     [HttpGet]

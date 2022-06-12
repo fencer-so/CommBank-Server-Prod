@@ -15,5 +15,12 @@ public class User
 
     public string? Password { get; set; }
 
-    public List<ObjectId>? ApplicationIds { get; set; }
+    [BsonRepresentation(BsonType.ObjectId)]
+    public List<string>? AccountIds { get; set; }
+
+    [BsonRepresentation(BsonType.ObjectId)]
+    public List<string>? GoalIds { get; set; }
+
+    [BsonRepresentation(BsonType.ObjectId)]
+    public List<string>? TransactionIds { get; set; }
 }

@@ -2,14 +2,12 @@
 using CommBank.Models;
 using CommBank.Services;
 
-namespace CommBank.Tests;
+namespace CommBank.Tests.Fake;
 
 public class FakeGoalsService : IGoalsService
 {
     List<Goal> _goals;
     Goal _goal;
-
-
 
     public FakeGoalsService(List<Goal> goals, Goal goal)
     {

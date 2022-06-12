@@ -21,8 +21,5 @@ public class Account
     public AccountType AccountType { get; set; }
 
     [BsonRepresentation(BsonType.ObjectId)]
-    public string? ApplicationId { get; set; }
-
-    [BsonRepresentation(BsonType.ObjectId)]
     public List<string>? TransactionIds { get; set; }
 }

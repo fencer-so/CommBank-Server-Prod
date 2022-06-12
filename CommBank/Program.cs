@@ -15,7 +15,6 @@ var mongoClient = new MongoClient(builder.Configuration.GetConnectionString("Com
 var mongoDatabase = mongoClient.GetDatabase("CommBank");
 
 var accountsService = new AccountsService(mongoDatabase);
-var applicationsService = new ApplicationsService(mongoDatabase);
 var authService = new AuthService(mongoDatabase);
 var goalsService = new GoalsService(mongoDatabase);
 var tagsService = new TagsService(mongoDatabase);
@@ -23,7 +22,6 @@ var transactionsService = new TransactionsService(mongoDatabase);
 var usersService = new UsersService(mongoDatabase);
 
 builder.Services.AddSingleton(accountsService);
-builder.Services.AddSingleton(applicationsService);
 builder.Services.AddSingleton(authService);
 builder.Services.AddSingleton(goalsService);
 builder.Services.AddSingleton(tagsService);
