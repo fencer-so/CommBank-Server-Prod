@@ -96,7 +96,7 @@ public class GoalController : ControllerBase
             return NotFound();
         }
 
-        goal.IconName = updatedIcon.IconName;
+        goal.Icon = updatedIcon.Icon;
 
         await _goalsService.UpdateAsync(id, goal);
 
