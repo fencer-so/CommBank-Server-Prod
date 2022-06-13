@@ -17,6 +17,10 @@ public class TransactionController : ControllerBase
     public async Task<List<Transaction>> Get() =>
         await _transactionsService.GetAsync();
 
+    [HttpGet("User/{id:length(24)}")]
+    public async Task<List<Transaction>?> GetForUser(string id) =>
+    await _transactionsService.GetForUserAsync(id);
+
     [HttpGet("{id:length(24)}")]
     public async Task<ActionResult<Transaction>> Get(string id)
     {
