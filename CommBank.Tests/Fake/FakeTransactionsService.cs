@@ -17,6 +17,9 @@ public class FakeTransactionsService : ITransactionsService
     public async Task<List<Transaction>> GetAsync() =>
         await Task.FromResult(_transactions);
 
+    public async Task<List<Transaction>?> GetForUserAsync(string id) =>
+        await Task.FromResult(_transactions);
+
     public async Task<Transaction?> GetAsync(string id) =>
         await Task.FromResult(_transaction);
 
